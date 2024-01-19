@@ -1,6 +1,9 @@
 import 'package:course_exam/func/get_currency_json.dart';
+import 'package:course_exam/model/currency.dart';
+import 'package:course_exam/view/home.dart';
 import 'package:course_exam/view/load.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -25,7 +28,10 @@ class MyApp extends StatelessWidget {
           future: getCurrenyJson('https://api.currencyapi.com/v3/latest?apikey=cur_live_KpNfQUj0vrj1cinZSYOY2z5eUAzspAHFFd7Iiyt5'), // a previously-obtained Future<String> or null
           builder: (BuildContext context, AsyncSnapshot<List<dynamic>> snapshot) {
             if(snapshot.hasData){
-              return const Text('Contain data');
+              return Provider(
+                create: (context) => snapshot.data as List<Currency>,
+                child: const MyHomePage()
+                );
             }
             else if(snapshot.hasError){
               return const AlertDialog(

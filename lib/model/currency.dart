@@ -5,8 +5,8 @@ class Currency {
   const Currency(this.name, this.value);
 
   Currency.fromJson(Map<String, dynamic> json)
-    : name = json[DataFieldsApi.code],
-      value = json[DataFieldsApi.value];
+    : name = json[DataFieldsApi.code] as String,
+      value = json[DataFieldsApi.value].toDouble();
 }
 
 class DataFieldsApi {
